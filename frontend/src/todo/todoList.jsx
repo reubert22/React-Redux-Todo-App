@@ -1,6 +1,8 @@
 import React from 'react'
-import IconButton from '../template/iconButton'
 import { connect } from 'react-redux'
+
+import IconButton from '../template/iconButton'
+
 
 /**
  * It controls todolist renderization, in other words, that make the todolist
@@ -46,5 +48,5 @@ const TodoList = props => {
     )
 }
 
-const mapStateToProps = state => ({list: state.todo.list})
+const mapStateToProps = state => ({ list: state.todo.list })
 export default connect(mapStateToProps)(TodoList)
