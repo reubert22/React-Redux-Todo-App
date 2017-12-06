@@ -2,6 +2,9 @@ import axios from 'axios'
 
 const URL = 'http://localhost:3003/api/todos'
 
+/**
+ * Below we've methods to todoForm manipulation
+ */
 export const changeDescription = event => ({
     type: 'DESCRIPTION_CHANGED',
     payload: event.target.value
@@ -20,5 +23,29 @@ export const add = (description) => {
         axios.post(URL, { description })
             .then(resp => dispatch({type: 'TODO_ADDED', payload: resp.data}))
             .then(resp => dispatch(search()))
+    }
+}
+
+/**
+ * Below we've methods to todoList manipulation
+ */
+export const markAsDone = (todo) => {
+    return dispatch => {
+        axios.put(`${URL}/${todo._id}`, { ...todo, done: true })
+            .then(resp => dispatch(search()))
+    }
+}
+
+export const markAsPending = (todo) => {
+    return dispatch =>{
+        axios.put(`${URL}/${todo._id}`, { ...todo, done: false })
+            .then(resp => dispatch(search()))
+    }
+}
+
+export const remove = (todo) => {
+    return dispatch => {
+        axios.delete(`${URL}/${todo._id}`)
+        .then(resp => dispatch(search()))
     }
 }
