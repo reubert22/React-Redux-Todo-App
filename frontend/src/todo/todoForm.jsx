@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
+
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Grid from './grid'
 import IconButton from '../template/iconButton'
-import { add, changeDescription, search } from './todoActions'
+import { add, changeDescription, search, clear } from './todoActions'
 
+/**
+ * It controls todo-app form renderization, and some methods
+ */
 class TodoForm extends Component {
     constructor(props) {
         super(props)
@@ -21,7 +25,7 @@ class TodoForm extends Component {
         if(e.key === 'Enter'){
             e.shiftKey ? search() : add(description)
         }else if(e.key === 'Escape') {
-            props.handleClear()
+            clear()
         }
     }
 
@@ -42,10 +46,10 @@ class TodoForm extends Component {
                         onClick={() => add(description)}>
                     </IconButton>
                     <IconButton style='info' icon='search'
-                        onClick={() => search()}>
+                        onClick={search}>
                     </IconButton>
                     <IconButton style='default' icon='close'
-                        onClick={this.props.handleClear}>
+                        onClick={this.props.clear}>
                     </IconButton>
                 </Grid>
             </div>
@@ -56,5 +60,5 @@ class TodoForm extends Component {
 
 const mapStateToProps = state => ({ description: state.todo.description })
 const mapDispatchToProps = dispatch => 
-    bindActionCreators({ add, changeDescription, search }, dispatch)
+    bindActionCreators({ add, changeDescription, search, clear }, dispatch)
 export default connect(mapStateToProps, mapDispatchToProps)(TodoForm)

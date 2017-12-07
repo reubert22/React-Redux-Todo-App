@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -7,8 +8,8 @@ import { markAsDone, markAsPending, remove } from './todoActions'
 
 
 /**
- * It controls todoList renderization, in other words, that make the todoList
- * came from backend to our frontend
+ * It controls todo-app list renderization, in other words, 
+ * that make the todo-app list data came from backend to our frontend
  */
 const TodoList = props => {
     
